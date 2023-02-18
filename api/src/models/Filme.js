@@ -1,4 +1,4 @@
-const sequelize = require('../database/database.config.js');
+const sequelize = require('../database/database.js');
 const { DataTypes } = require('sequelize');
 
 const Filme = sequelize.define(

@@ -1,17 +1,17 @@
 const sequelize = require('../database/database.js');
 const { DataTypes } = require('sequelize');
 
-const Sala = sequelize.define(
-	'salas',
+const Dia = sequelize.define(
+	'dias',
 	{
-		salaId: {
+		diaId: {
 			type: DataTypes.INTEGER,
+			allowNull: false,
 			primaryKey: true,
-			autoIncrement: true,
-			allowNull: false
+			autoIncrement: true
 		},
-		numero: {
-			type: DataTypes.INTEGER,
+		data: {
+			type: DataTypes.DATE,
 			allowNull: false
 		}
 	},
@@ -20,6 +20,6 @@ const Sala = sequelize.define(
 	}
 );
 
-// Sala.sync({ force: true });
+// Dia.sync({ force: true });
 
-module.exports = Sala;
+module.exports = Dia;
