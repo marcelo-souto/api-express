@@ -27,6 +27,10 @@ const Ingresso = sequelize.define(
 				model: Assento,
 				key: 'assentoId'
 			}
+		},
+		total: {
+			type: DataTypes.DECIMAL,
+			allowNull: false
 		}
 	},
 	{
@@ -46,4 +50,4 @@ Ingresso.belongsTo(Assento, { foreignKey: 'assentoId' });
 
 Assento.hasOne(Ingresso, { foreignKey: 'assentoId' });
 
-module.exports = Ingresso
+module.exports = Ingresso;

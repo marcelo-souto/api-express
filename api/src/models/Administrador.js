@@ -21,6 +21,10 @@ const Administrador = sequelize.define(
 		senha: {
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		emailVerificado: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false
 		}
 	},
 	{
