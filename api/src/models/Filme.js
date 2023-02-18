@@ -9,6 +9,14 @@ const Filme = sequelize.define(
 			primaryKey: true,
 			autoIncrement: true,
 			allowNull: false
+		},
+		nome: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		sinopse: {
+			type: DataTypes.TEXT,
+			allowNull: false
 		}
 	},
 	{

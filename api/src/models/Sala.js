@@ -9,6 +9,10 @@ const Sala = sequelize.define(
 			primaryKey: true,
 			autoIncrement: true,
 			allowNull: false
+		},
+		numero: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
 	},
 	{

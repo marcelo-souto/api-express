@@ -9,6 +9,18 @@ const Cliente = sequelize.define(
 			primaryKey: true,
 			autoIncrement: true,
 			allowNull: false
+		},
+		nome: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		email: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		senha: {
+			type: DataTypes.STRING,
+			allowNull: false
 		}
 	},
 	{
