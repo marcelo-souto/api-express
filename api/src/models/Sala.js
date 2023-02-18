@@ -13,13 +13,15 @@ const Sala = sequelize.define(
 		numero: {
 			type: DataTypes.INTEGER,
 			allowNull: false
+		},
+		totalAssentos: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
 	},
 	{
 		timestamps: false
 	}
 );
-
-// Sala.sync({ force: true });
 
 module.exports = Sala;
