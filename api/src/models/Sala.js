@@ -17,6 +17,10 @@ const Sala = sequelize.define(
 		totalAssentos: {
 			type: DataTypes.INTEGER,
 			allowNull: false
+		},
+		totalFilas: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
 	},
 	{
