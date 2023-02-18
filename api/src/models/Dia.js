@@ -11,7 +11,7 @@ const Dia = sequelize.define(
 			autoIncrement: true
 		},
 		data: {
-			type: DataTypes.DATE,
+			type: DataTypes.DATEONLY,
 			allowNull: false
 		}
 	},
