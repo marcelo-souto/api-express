@@ -24,6 +24,4 @@ const Filme = sequelize.define(
 	}
 );
 
-// Filme.sync({ force: true });
-
 module.exports = Filme;
