@@ -1,7 +1,7 @@
 const Administrador = require('../models/Administrador.js');
 const validate = require('../functions/validate.js');
 require('dotenv').config();
-const bcrypt = require('bcrypt');
+const { hash, compare } = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const administradorController = {
@@ -15,13 +15,13 @@ const administradorController = {
 
 			const administrador = await Administrador.findOne({
 				where: {
-					nome: nome
+					email: email
 				}
 			});
 
 			if (administrador) throw new Error('Usuário já cadastrado.');
 
-			const senhaCriptografada = await bcrypt.hash(senha, 10);
+			const senhaCriptografada = await hash(senha, 10);
 
 			const novoAdministrador = await Administrador.create({
 				nome,
@@ -30,7 +30,9 @@ const administradorController = {
 				emailVerificado: false
 			});
 
-			return res.status(201).json(novoAdministrador);
+			return res.status(201).json({
+				message: `Usuário ${novoAdministrador.nome} cadastrado com sucesso.`
+			});
 		} catch (erro) {
 			return res.status(400).json({ erro: erro.message });
 		}
@@ -50,7 +52,7 @@ const administradorController = {
 			if (!administrador)
 				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 
-			const resultado = await bcrypt.compare(senha, administrador.senha);
+			const resultado = await compare(senha, administrador.senha);
 
 			if (!resultado) throw new Error('Usuário ou senha inválida.');
 
@@ -73,7 +75,7 @@ const administradorController = {
 		try {
 			const administrador = await Administrador.findByPk(id, {
 				attributes: {
-					exclude: 'senha'
+					exclude: ['senha', 'emailVerificado']
 				}
 			});
 
@@ -128,9 +130,24 @@ const administradorController = {
 			return res.status(400).json({ erro: erro.message });
 		}
 	},
-  delete: async (req, res) => {
-    return res.send('Em construção')
-  }
+	delete: async (req, res) => {
+		const { id } = req.body;
+
+		try {
+			const administrador = await Administrador.findByPk(id);
+
+			if (!administrador)
+				return res.status(404).json({ erro: 'Usuário não encontrado.' });
+
+			const administradorDeletado = await administrador.destroy();
+
+			return res.status(200).json({
+				mensagem: `Cadastro do usuário ${administradorDeletado.nome} excluido com sucesso.`
+			});
+		} catch (erro) {
+			return res.status(400).json({ erro: erro.message });
+		}
+	}
 };
 
 module.exports = administradorController;
