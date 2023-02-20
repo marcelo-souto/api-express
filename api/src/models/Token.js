@@ -26,6 +26,6 @@ const Token = sequelize.define(
 );
 
 
-Token.sync({ force: true });
+// Token.sync({ force: true });
 
 module.exports = Token;
