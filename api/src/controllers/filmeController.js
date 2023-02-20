@@ -1,6 +1,7 @@
 const Administrador = require('../models/Administrador.js');
 const Filme = require('../models/Filme.js');
 const Genero = require('../models/Genero.js');
+const Sessao = require('../models/Sessao.js');
 const validate = require('../functions/validate.js');
 const imageUploadHandle = require('../functions/imageUploadHandle.js');
 const fetch = require('node-fetch');
@@ -66,9 +67,9 @@ const filmeController = {
 				try {
 					response = await fetch(poster);
 					if (!response.ok) throw new Error();
-
 				} catch (error) {
-					if (error) return res.status(400).json({ erro: 'Link de imagem invalido.' });
+					if (error)
+						return res.status(400).json({ erro: 'Link de imagem invalido.' });
 				}
 
 				if (validated) {
@@ -105,6 +106,65 @@ const filmeController = {
 				disponivelLegendado: dLG,
 				generoId
 			});
+
+			return res.status(200).json(filme);
+		} catch (erro) {
+			return res.status(400).json({ erro: erro.message });
+		}
+	},
+	getAll: async (req, res) => {
+		let queries;
+		if (req.url.includes('include'))
+			queries = req.url.replaceAll('include=', '').split('?')[1].split('&');
+
+		const includesQuery = {
+			genero: {
+				model: Genero,
+				as: 'genero'
+			},
+			sessoes: {
+				model: Sessao,
+				as: 'sessoes'
+			}
+		};
+
+		try {
+			const filmes = await Filme.findAll(
+				queries && {
+					include: queries.filter((query) => includesQuery[query])
+				}
+			);
+
+			return res.status(200).json(filmes);
+		} catch (erro) {
+			return res.status(400).json({ erro: erro.message });
+		}
+	},
+	getById: async (req, res) => {
+		const { filmeId } = req.params;
+
+		let queries;
+		if (req.url.includes('include'))
+			queries = req.url.replaceAll('include=', '').split('?')[1].split('&');
+
+		const includesQuery = {
+			genero: {
+				model: Genero,
+				as: 'genero'
+			},
+			sessoes: {
+				model: Sessao,
+				as: 'sessoes'
+			}
+		};
+
+		try {
+			const filme = await Filme.findByPk(
+				filmeId,
+				queries && {
+					include: queries.filter((query) => includesQuery[query])
+				}
+			);
 
 			return res.status(200).json(filme);
 		} catch (erro) {
