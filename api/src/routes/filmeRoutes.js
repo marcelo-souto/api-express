@@ -6,6 +6,8 @@ const upload = require('../middlewares/upload.js');
 const router = Router();
 
 router.post('/filme/create', checkToken, upload, filmeController.create);
+
+
 router.get('/filme/get', filmeController.getAll);
 router.get('/filme/get/:filmeId', filmeController.getById);
 

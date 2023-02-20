@@ -4,6 +4,7 @@ const Genero = require('../models/Genero.js');
 const Sessao = require('../models/Sessao.js');
 const validate = require('../functions/validate.js');
 const imageUploadHandle = require('../functions/imageUploadHandle.js');
+const { unlink } = require('fs/promises');
 const fetch = require('node-fetch');
 
 // ==== CAMPOS ====
@@ -34,11 +35,12 @@ const filmeController = {
 		try {
 			// Checanco se o adm existe
 			const administrador = await Administrador.findByPk(id);
-			if (!administrador)
-				return res.status(404).json({ erro: 'Você não tem permissão' });
+			if (!administrador) throw new Error('Você não tem permissão');
 
 			// Validando os campos
 			validate({ nome, isRequired: true });
+			nome = nome.trim().toLowerCase();
+
 			validate({ sinopse, isRequired: true });
 			validate({
 				'data de estreia': dataEstreia,
@@ -53,10 +55,13 @@ const filmeController = {
 			});
 			validate({ 'id do genero': generoId, type: 'numero', isRequired: true });
 
+			// Checando se o filme ja existe
+			const filmeJaExiste = await Filme.findOne({ where: { nome: nome } });
+			if (filmeJaExiste) throw new Error('Filme já cadastrado.');
+
 			// Checando se o genero existe
 			const genero = await Genero.findByPk(generoId);
-			if (!genero)
-				return res.status(404).json({ erro: 'Genero não encontrado.' });
+			if (!genero) throw new Error('Genero não encontrado.');
 
 			// Checando se poster veio como link
 			if (poster !== undefined) {
@@ -109,6 +114,8 @@ const filmeController = {
 
 			return res.status(200).json(filme);
 		} catch (erro) {
+
+			if (req.file) await unlink(req.file.path) 
 			return res.status(400).json({ erro: erro.message });
 		}
 	},

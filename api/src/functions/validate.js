@@ -14,7 +14,7 @@ const types = {
 		message: 'Utilize apenas numeros que sigam padrão monetario'
 	},
 	numero: {
-		regex: /^[0-9]$/,
+		regex: /^[0-9]+$/,
 		message: 'Utilize apenas números'
 	},
 	telefone: {
