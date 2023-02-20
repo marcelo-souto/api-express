@@ -27,12 +27,12 @@ const generoController = {
 		}
 	},
 	getById: async (req, res) => {
-		const { id } = req.params;
+		const { generoId } = req.params;
 		const { include } = req.query;
 
 		try {
 			const genero = await Genero.findByPk(
-				id,
+				generoId,
 				include && {
 					include: include
 				}
@@ -89,7 +89,7 @@ const generoController = {
 		}
 	},
 	delete: async (req, res) => {
-		const { generoId } = req.body;
+		const { generoId } = req.params;
 
 		try {
 			const genero = await Genero.findByPk(generoId);
