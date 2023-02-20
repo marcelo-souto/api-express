@@ -1,9 +1,10 @@
 const express = require('express');
 const logger = require('./functions/logger.js');
-const path = require('path')
+const path = require('path');
 require('dotenv').config();
 
 const administradorRoutes = require('./routes/administradorRoutes.js');
+const clienteRoutes = require('./routes/clienteRoutes.js');
 const filmeRoutes = require('./routes/filmeRoutes.js');
 const generoRoutes = require('./routes/generoRoutes.js');
 
@@ -18,6 +19,7 @@ server.use(logger);
 
 // Rotas
 server.use('/', administradorRoutes);
+server.use('/', clienteRoutes);
 server.use('/', filmeRoutes);
 server.use('/', generoRoutes);
 
