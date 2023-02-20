@@ -40,7 +40,7 @@ const Filme = sequelize.define(
 			}
 		},
 		poster: {
-			type: DataTypes.STRING,
+			type: DataTypes.JSON,
 			allowNull: false
 		},
 		disponivel3D: {
@@ -70,6 +70,6 @@ Filme.hasOne(Genero, { foreignKey: 'generoId' });
 Genero.hasMany(Filme, { foreignKey: 'generoId' });
 Filme.belongsTo(Genero, { foreignKey: 'generoId' });
 
-Filme.sync({ force: true });
+// Filme.sync({ force: true });
 
 module.exports = Filme;

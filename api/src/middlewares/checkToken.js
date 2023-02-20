@@ -12,6 +12,7 @@ const checkToken = async (req, res, next) => {
 		if (administradorId) req.body.administradorId = administradorId;
 
 		next();
+		return
 	} catch (error) {
 		return res.status(401).json({ erro: 'Token inválido.' });
 	}

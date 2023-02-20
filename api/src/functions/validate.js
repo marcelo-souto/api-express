@@ -24,6 +24,10 @@ const types = {
 	data: {
 		regex: /(\d{4})[-.\/](\d{2})[-.\/](\d{2})/,
 		message: 'Insira uma data válida'
+	},
+	boolean: {
+		regex: /^true|false$/,
+		message: 'Insira um valor correto'
 	}
 };
 

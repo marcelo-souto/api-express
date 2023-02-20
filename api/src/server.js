@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('./functions/logger.js');
+const path = require('path')
 require('dotenv').config();
 
 const administradorRoutes = require('./routes/administradorRoutes.js');
@@ -11,6 +12,7 @@ const port = process.env.PORT;
 const server = express();
 
 // Middlewares
+server.use(express.static(path.join(__dirname, '../public')));
 server.use(express.json());
 server.use(logger);
 
