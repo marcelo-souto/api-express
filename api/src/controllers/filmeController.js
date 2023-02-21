@@ -29,7 +29,8 @@ const filmeController = {
 			poster,
 			disponivel3D: d3D,
 			disponivelLegendado: dLG,
-			generoId
+			generoId,
+			duracaoMinutos
 		} = req.body;
 
 		try {
@@ -54,6 +55,7 @@ const filmeController = {
 				isRequired: true
 			});
 			validate({ 'id do genero': generoId, type: 'numero', isRequired: true });
+			validate({'duração em minutos': duracaoMinutos, type: 'numero', isRequired: true})
 
 			// Checando se o filme ja existe
 			const filmeJaExiste = await Filme.findOne({ where: { nome: nome } });
@@ -109,7 +111,8 @@ const filmeController = {
 				poster,
 				disponivel3D: d3D,
 				disponivelLegendado: dLG,
-				generoId
+				generoId,
+				duracaoMinutos
 			});
 
 			return res.status(200).json(filme);
@@ -190,7 +193,8 @@ const filmeController = {
 			poster,
 			disponivel3D: d3D,
 			disponivelLegendado: dLG,
-			generoId
+			generoId,
+			duracaoMinutos
 		} = req.body;
 
 		try {
@@ -211,6 +215,7 @@ const filmeController = {
 			validate({ 'data de estreia': dataEstreia, type: 'data' });
 			validate({ 'disponível em 3D': d3D, type: 'boolean' });
 			validate({ 'disponível legendado': dLG, type: 'boolean' });
+			validate({'duração em minutos': duracaoMinutos, type: 'numero'})
 
 			// Checando se ja existe filme com o mesmo nome
 			if (nome) {
@@ -279,7 +284,8 @@ const filmeController = {
 				poster: poster ? poster : filme.poster,
 				disponivel3D: d3D ? d3D : filme.disponivel3D,
 				disponivelLegendado: dLG ? dLG : filme.disponivelLegendado,
-				generoId: generoId ? generoId : filme.generoId
+				generoId: generoId ? generoId : filme.generoId,
+				duracaoMinutos: duracaoMinutos ? duracaoMinutos : filme.duracaoMinutos
 			});
 
 			return res.status(200).json(filmeAtualizado);

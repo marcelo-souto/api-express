@@ -50,6 +50,10 @@ const Filme = sequelize.define(
 		disponivelLegendado: {
 			type: DataTypes.BOOLEAN,
 			allowNull: false
+		},
+		duracaoMinutos: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
 	},
 	{
