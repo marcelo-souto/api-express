@@ -2,29 +2,39 @@ const Cliente = require('../models/Cliente.js')
 const Token = require('../models/Token.js')
 const validate = require('../functions/validate.js')
 const nodemailer = require('nodemailer')
-const mailer = require('../smtp/smtp.js')
 const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcrypt')
-require('dotenv').config();
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+console.log(process.env.E_HOST)
 
 const transporter = nodemailer.createTransport({
-
-    host:mailer.host,
-    port:mailer.port,
+	
+    host:process.env.E_HOST,
+    port:process.env.E_PORT,
     secure:false,
     auth:{
-        user:mailer.user,
-        pass:mailer.pass
+        user:process.env.E_USER,
+        pass:process.env.E_PASS
     },
     tls:{
         rejectUnauthorized:false,
     }
 });
 
+
+
+
+
 const clienteController = {
 
     post:async(req,res)=>{
-        
+
+
+
+
         const {nome,email,senha,emailVerificado}= req.body
 
         try {     
@@ -57,19 +67,18 @@ const clienteController = {
                 token:newToken
             })
 
-            const emailCliente = await transporter.sendMail({
-                text:"Autenticação",
-                subject: "Validação para login",
-                from:`Cinema <nodecinemapc@gmail.com>`,
-                to:`${email}`,
-                html:`<html>
-                <body>
-                    <strong>Para validar sua conta:</strong>.
-                    <a href="http://localhost:3000/cliente/att/?teste=${newToken}">Click aqui</a>
-                </body>
-                </html>`
-            })
-
+			const emailCliente = await transporter.sendMail({
+				text:"Autenticação",
+				subject: "Validação para login",
+				from:`Cinema <nodecinemapc2@gmail.com>`,
+				to:`${email}`,
+				html:`<html>
+				<body>
+					<strong>Para validar sua conta:</strong>.
+					<a href="http://localhost:3000/cliente/att/?teste=${newToken}">Click aqui</a>
+				</body>
+				</html>`
+			})
 
             return res.status(201).json(data)
 
@@ -90,13 +99,12 @@ const clienteController = {
 				}
 			});
 
-			console.log(cliente)
-
 			if (!cliente)
 				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 
-
 			if (senha !== cliente.senha) throw new Error('Usuário ou senha inválida.');
+
+			if (cliente.emailVerificado == false) throw new Error('Email não veirificado.');
 
 			const token = jwt.sign(
 				{ id: cliente.clienteId },
@@ -108,7 +116,7 @@ const clienteController = {
 				.status(200)
 				.json({ mensagem: 'Login realizado com sucesso', token });
 		} catch (erro) {
-			return res.status(400).json({ erro: erro.message });
+			return res.status(401).json({ erro: erro.message });
 		}
 	},
 
@@ -121,20 +129,22 @@ const clienteController = {
             
             const cliente = await  Cliente.findByPk(id)
 
+			const tokenValid = await Token.findOne({where:{clienteId:id}})
+
+			if(tokenValid) await tokenValid.destroy()
+			
             if(cliente.emailVerificado == false) {
                 await cliente.update({
-                emailVerificado:true
+                	emailVerificado:true
                 })
-                console.log('Usuário verificado')
+
+              	return res.status(200).json('Usuário verificado')
             }else{
-                console.log('Link invalido')
+                throw new Error('Link invalido')
             }
 
-            console.log(id)
-            return  res.json(id)
-
         } catch (erro) {
-            return res.json({error: error.message})
+            return res.status(401).json({erro: erro.message})
         }
         
     },
@@ -149,10 +159,10 @@ const clienteController = {
 				}
 			});
 
-			if (!cliente)
-				return res.status(404).json({ erro: 'Usuário não encontrado.' });
+			if (!cliente) return res.status(404).json({ erro: 'Usuário não encontrado.' });
 
 			return res.status(200).json(cliente);
+
 		} catch (erro) {
 			return res.status(400).json({ erro: erro.message });
 		}

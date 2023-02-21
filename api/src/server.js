@@ -1,12 +1,13 @@
 const express = require('express')
 const logger = require('./functions/logger.js')
 const dotenv = require('dotenv')
-const router = require('./routes/clienteRoute.js')
+
 
 dotenv.config()
 
 const administradorRoutes = require('./routes/administradorRoutes.js');
 const filmeRoutes = require('./routes/filmeRoutes.js');
+const clienteRoutes = require('./routes/clienteRoute.js')
 
 // Variaveis
 const port = process.env.PORT;
@@ -19,7 +20,7 @@ server.use(logger);
 // Rotas
 server.use('/', administradorRoutes);
 server.use('/', filmeRoutes);
-server.use('/', router)
+server.use('/', clienteRoutes)
 
 server.get('/', (req, res) => {
 	return res.send('<h1>Servidor rodando ...<h1>');
