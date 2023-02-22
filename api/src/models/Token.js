@@ -11,8 +11,8 @@ const Token = sequelize.define(
 			autoIncrement: true,
 			allowNull: false
 		},
-		clienteId: {
-			type: DataTypes.INTEGER,
+		usuarioId: {
+			type: DataTypes.STRING,
 			allowNull: false
 		},
 		token: {

@@ -55,7 +55,11 @@ const filmeController = {
 				isRequired: true
 			});
 			validate({ 'id do genero': generoId, type: 'numero', isRequired: true });
-			validate({'duração em minutos': duracaoMinutos, type: 'numero', isRequired: true})
+			validate({
+				'duração em minutos': duracaoMinutos,
+				type: 'numero',
+				isRequired: true
+			});
 
 			// Checando se o filme ja existe
 			const filmeJaExiste = await Filme.findOne({ where: { nome: nome } });
@@ -138,11 +142,9 @@ const filmeController = {
 		};
 
 		try {
-			const filmes = await Filme.findAll(
-				queries && {
-					include: queries.filter((query) => includesQuery[query])
-				}
-			);
+			const filmes = await Filme.findAll({
+				include: queries && queries.filter((query) => includesQuery[query])
+			});
 
 			return res.status(200).json(filmes);
 		} catch (erro) {
@@ -168,12 +170,9 @@ const filmeController = {
 		};
 
 		try {
-			const filme = await Filme.findByPk(
-				filmeId,
-				queries && {
-					include: queries.filter((query) => includesQuery[query])
-				}
-			);
+			const filme = await Filme.findByPk(filmeId, {
+				include: queries && queries.filter((query) => includesQuery[query])
+			});
 
 			if (!filme)
 				return res.status(404).json({ erro: 'Filme não encontrado.' });
@@ -215,7 +214,7 @@ const filmeController = {
 			validate({ 'data de estreia': dataEstreia, type: 'data' });
 			validate({ 'disponível em 3D': d3D, type: 'boolean' });
 			validate({ 'disponível legendado': dLG, type: 'boolean' });
-			validate({'duração em minutos': duracaoMinutos, type: 'numero'})
+			validate({ 'duração em minutos': duracaoMinutos, type: 'numero' });
 
 			// Checando se ja existe filme com o mesmo nome
 			if (nome) {
@@ -249,7 +248,8 @@ const filmeController = {
 						return res.status(400).json({ erro: 'Link de imagem invalido.' });
 				}
 
-				if (filme.poster.url === null) await unlink(`./public/media/${filme.poster.img}`)
+				if (filme.poster.url === null)
+					await unlink(`./public/media/${filme.poster.img}`);
 
 				if (validated) {
 					const link = poster.split('/');
@@ -264,7 +264,8 @@ const filmeController = {
 
 			// Checando se veio como arquivo de imagem e fazendo tratamento
 			if (req.file) {
-				if (filme.poster.url === null) await unlink(`./public/media/${filme.poster.img}`)
+				if (filme.poster.url === null)
+					await unlink(`./public/media/${filme.poster.img}`);
 
 				const file = await imageUploadHandle(req.file);
 				if (file) {
@@ -290,7 +291,6 @@ const filmeController = {
 
 			return res.status(200).json(filmeAtualizado);
 		} catch (erro) {
-
 			if (req.file) await unlink(req.file.path);
 			return res.status(400).json({ erro: erro.message });
 		}
