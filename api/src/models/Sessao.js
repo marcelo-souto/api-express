@@ -30,14 +30,6 @@ const Sessao = sequelize.define(
 				key: 'salaId'
 			}
 		},
-		horarioId: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-			references: {
-				model: Horario,
-				key: 'horarioId'
-			}
-		},
 		administradorId: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -49,7 +41,16 @@ const Sessao = sequelize.define(
 		preco: {
 			type: DataTypes.DECIMAL,
 			allowNull: false
-		}
+		},
+		inicioMinuto:{
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		terminoMinuto:{
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+
 	},
 	{
 		timestamps: false
@@ -68,9 +69,6 @@ Sessao.belongsTo(Sala, { foreignKey: 'salaId' });
 // Traz a sala com as sessoes
 Sala.hasMany(Sessao, { foreignKey: 'salaId' });
 
-// Traz a sessao com o horario
-Sessao.hasOne(Horario, { foreignKey: 'horarioId' });
-Sessao.belongsTo(Horario, { foreignKey: 'horarioId' });
 // Traz o horario com as sessoes
 Horario.hasMany(Sessao, { foreignKey: 'horarioId' });
 

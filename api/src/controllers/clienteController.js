@@ -4,19 +4,15 @@ const validate = require('../functions/validate.js')
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcrypt')
-const dotenv = require('dotenv')
-
-dotenv.config()
-
-console.log(process.env.E_HOST)
+require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
-	
-    host:process.env.E_HOST,
+
+	host:process.env.E_HOST,
     port:process.env.E_PORT,
     secure:false,
     auth:{
-        user:process.env.E_USER,
+		user:process.env.E_USER,
         pass:process.env.E_PASS
     },
     tls:{
@@ -24,17 +20,10 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-
-
-
-
 const clienteController = {
 
     post:async(req,res)=>{
-
-
-
-
+        
         const {nome,email,senha,emailVerificado}= req.body
 
         try {     
@@ -80,6 +69,7 @@ const clienteController = {
 				</html>`
 			})
 
+
             return res.status(201).json(data)
 
         } catch (error) {
@@ -99,12 +89,12 @@ const clienteController = {
 				}
 			});
 
+			console.log(cliente)
+
 			if (!cliente)
 				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 
 			if (senha !== cliente.senha) throw new Error('Usuário ou senha inválida.');
-
-			if (cliente.emailVerificado == false) throw new Error('Email não veirificado.');
 
 			const token = jwt.sign(
 				{ id: cliente.clienteId },
@@ -116,7 +106,7 @@ const clienteController = {
 				.status(200)
 				.json({ mensagem: 'Login realizado com sucesso', token });
 		} catch (erro) {
-			return res.status(401).json({ erro: erro.message });
+			return res.status(400).json({ erro: erro.message });
 		}
 	},
 
@@ -129,22 +119,22 @@ const clienteController = {
             
             const cliente = await  Cliente.findByPk(id)
 
-			const tokenValid = await Token.findOne({where:{clienteId:id}})
-
-			if(tokenValid) await tokenValid.destroy()
-			
             if(cliente.emailVerificado == false) {
                 await cliente.update({
-                	emailVerificado:true
+                emailVerificado:true
                 })
 
-              	return res.status(200).json('Usuário verificado')
+				const tokenValid = await Token.findOne({where:{clienteId:id}})
+
+				if(tokenValid) await tokenValid.destroy()
+
+                return res.status(200).json('Usuário verificado')
             }else{
-                throw new Error('Link invalido')
+				throw new Error('Link invalido')
             }
 
         } catch (erro) {
-            return res.status(401).json({erro: erro.message})
+            return res.json({erro: erro.message})
         }
         
     },
@@ -159,10 +149,10 @@ const clienteController = {
 				}
 			});
 
-			if (!cliente) return res.status(404).json({ erro: 'Usuário não encontrado.' });
+			if (!cliente)
+				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 
 			return res.status(200).json(cliente);
-
 		} catch (erro) {
 			return res.status(400).json({ erro: erro.message });
 		}

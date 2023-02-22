@@ -1,5 +1,5 @@
 const sequelize = require('../database/database.js');
-const { DataTypes } = require('sequelize');
+const { DataTypes, INTEGER } = require('sequelize');
 const Administrador = require('./Administrador.js');
 const Genero = require('./Genero.js');
 
@@ -40,7 +40,7 @@ const Filme = sequelize.define(
 			}
 		},
 		poster: {
-			type: DataTypes.STRING,
+			type: DataTypes.JSON,
 			allowNull: false
 		},
 		disponivel3D: {
@@ -50,7 +50,12 @@ const Filme = sequelize.define(
 		disponivelLegendado: {
 			type: DataTypes.BOOLEAN,
 			allowNull: false
+		},
+		duracaoMinutos:{
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
+
 	},
 	{
 		timestamps: false
@@ -70,6 +75,6 @@ Filme.hasOne(Genero, { foreignKey: 'generoId' });
 Genero.hasMany(Filme, { foreignKey: 'generoId' });
 Filme.belongsTo(Genero, { foreignKey: 'generoId' });
 
-Filme.sync({ force: true });
+// Filme.sync({ force: true });
 
 module.exports = Filme;

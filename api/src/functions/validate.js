@@ -14,7 +14,7 @@ const types = {
 		message: 'Utilize apenas numeros que sigam padrão monetario'
 	},
 	numero: {
-		regex: /^[0-9]$/,
+		regex: /^[0-9]+$/,
 		message: 'Utilize apenas números'
 	},
 	telefone: {
@@ -24,26 +24,26 @@ const types = {
 	data: {
 		regex: /(\d{4})[-.\/](\d{2})[-.\/](\d{2})/,
 		message: 'Insira uma data válida'
+	},
+	boolean: {
+		regex: /^true|false$/,
+		message: 'Insira um valor correto'
 	}
 };
 
 function validate(values) {
-
 	const value = Object.values(values)[0];
 	const field = Object.keys(values)[0].toLowerCase();
 
 	if (!value && values.isRequired) {
-		console.log('validate1')
 		throw Error(`O campo ${field} é obrigatório.`);
-		
 	} else if (
 		value &&
 		values.type &&
 		types[values.type] &&
 		!types[values.type].regex.test(value)
 	) {
-		console.log('validate2')
-		throw  Error(`${types[values.type].message} no campo ${field}`);
+		throw Error(`${types[values.type].message} no campo ${field}`);
 	} else {
 		return true;
 	}

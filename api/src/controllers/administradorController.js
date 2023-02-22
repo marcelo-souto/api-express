@@ -2,7 +2,7 @@ const Administrador = require('../models/Administrador.js');
 const validate = require('../functions/validate.js');
 require('dotenv').config();
 const { hash, compare } = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const { sign } = require('jsonwebtoken');
 
 const administradorController = {
 	create: async (req, res) => {
@@ -56,8 +56,8 @@ const administradorController = {
 
 			if (!resultado) throw new Error('Usuário ou senha inválida.');
 
-			const token = jwt.sign(
-				{ id: administrador.administradorId },
+			const token = sign(
+				{ administradorId: administrador.administradorId },
 				process.env.PRIVATE_KEY,
 				{ expiresIn: '1d' }
 			);
@@ -70,7 +70,7 @@ const administradorController = {
 		}
 	},
 	getInfo: async (req, res) => {
-		const { id } = req.body;
+		const { administradorId: id } = req.body;
 
 		try {
 			const administrador = await Administrador.findByPk(id, {
@@ -88,7 +88,7 @@ const administradorController = {
 		}
 	},
 	update: async (req, res) => {
-		const { id, email, nome } = req.body;
+		const { administradorId: id, email, nome } = req.body;
 
 		if (!email && !nome)
 			return res.status(400).json({
@@ -131,7 +131,7 @@ const administradorController = {
 		}
 	},
 	delete: async (req, res) => {
-		const { id } = req.body;
+		const { administradorId:id } = req.body;
 
 		try {
 			const administrador = await Administrador.findByPk(id);
