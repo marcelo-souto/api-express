@@ -89,6 +89,8 @@ const clienteController = {
 				}
 			});
 
+			console.log(cliente)
+
 			if (!cliente)
 				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 
@@ -108,7 +110,7 @@ const clienteController = {
 				.status(200)
 				.json({ mensagem: 'Login realizado com sucesso', token });
 		} catch (erro) {
-			return res.status(401).json({ erro: erro.message });
+			return res.status(400).json({ erro: erro.message });
 		}
 	},
 
@@ -176,6 +178,8 @@ const clienteController = {
 				}
 			});
 
+			if (!cliente)
+				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 			if (!cliente)
 				return res.status(404).json({ erro: 'Usuário não encontrado.' });
 

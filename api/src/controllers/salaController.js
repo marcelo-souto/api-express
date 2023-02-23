@@ -91,7 +91,7 @@ const salaController = {
 				}
 			);
 			return res.status(200).json(salas);
-		} catch (error) {
+		} catch (erro) {
 			return res.status(400).json({ erro: erro.message });
 		}
 	},
@@ -113,7 +113,7 @@ const salaController = {
 			if (!sala) return res.status(404).json({ erro: 'Sala não encontrada.' });
 
 			return res.status(200).json(sala);
-		} catch (error) {
+		} catch (erro) {
 			return res.status(400).json({ erro: erro.message });
 		}
 	}

@@ -12,3 +12,5 @@ router.get('/sala/get', salaController.getAll);
 router.get('/sala/get/:salaId', salaController.getById);
 
 module.exports = router;
+
+module.exports = router;

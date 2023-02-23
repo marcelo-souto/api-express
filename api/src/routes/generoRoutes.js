@@ -14,3 +14,5 @@ router.get('/genero/get/:generoId', generoController.getById);
 router.get('/genero/get', generoController.getAll);
 
 module.exports = router;
+
+module.exports = router;
