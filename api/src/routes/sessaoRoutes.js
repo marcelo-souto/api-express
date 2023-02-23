@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/sessao/create', checkToken, sessaoController.create);
 router.put('/sessao/update', checkToken, sessaoController.update);
-router.delete('/sessao/delete', checkToken, sessaoController.delete);
+router.delete('/sessao/delete/:sessaoId', checkToken, sessaoController.delete);
 
 router.get('/sessao/get', sessaoController.getAll);
 router.get('/sessao/getbyid', sessaoController.getById);
