@@ -8,10 +8,7 @@ router.post('/sessao/create', checkToken, sessaoController.create);
 router.put('/sessao/update', checkToken, sessaoController.update);
 router.delete('/sessao/delete', checkToken, sessaoController.delete);
 
-router.get('/sessao/delete', sessaoController.getAll);
+router.get('/sessao/get', sessaoController.getAll);
 router.get('/sessao/getbyid', sessaoController.getById);
-
-
-
 
 module.exports = router;

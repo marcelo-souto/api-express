@@ -70,7 +70,7 @@ Sessao.belongsTo(Sala, { foreignKey: 'salaId' });
 Sala.hasMany(Sessao, { foreignKey: 'salaId' });
 
 // Traz o horario com as sessoes
-Horario.hasMany(Sessao, { foreignKey: 'horarioId' });
+// Horario.hasMany(Sessao, { foreignKey: 'horarioId' });
 
 Sessao.hasOne(Administrador, {
 	foreignKey: 'administradorId',
