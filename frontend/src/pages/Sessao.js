@@ -1,11 +1,13 @@
 import React from 'react';
-import Sala from '../components/Sala';
-import criarAssentos from '../helpers/criarAssentos';
+import Sala from '../components/Sessao/Sala';
+import criarAssentos from '../functions/criarAssentos';
 import { sessao } from '../api/sessaoExemplo';
 import styles from './Sessao.module.css';
-import SideBarMenu from '../components/SideBarMenu';
+import SideBarMenu from '../components/Sessao/SideBarMenu';
 import { getSessaoById } from '../api/Api';
 import useFetch from '../hooks/useFetch';
+import Head from '../components/Helpers/Head'
+import titulo from '../functions/titulo'
 
 function Sessao() {
 	const { loading, data, error, request } = useFetch();
@@ -15,8 +17,9 @@ function Sessao() {
 	const [assentosEscolhidos, setAssentosEscolhidos] = React.useState([]);
 
 	React.useEffect(() => {
+
 		const getData = async () => {
-			const { url, options } = getSessaoById(4);
+			const { url, options } = getSessaoById(8);
 			await request(url, options);
 		};
 
@@ -39,6 +42,7 @@ function Sessao() {
 	if (data)
 		return (
 			<div className={styles.container}>
+				<Head titulo={`Sessao | ${titulo(data.filme.nome)}`} />
 				<SideBarMenu
 					{...data}
 					assentosEscolhidos={assentosEscolhidos}

@@ -6,6 +6,7 @@ const validate = require('../functions/validate.js');
 const imageUploadHandle = require('../functions/imageUploadHandle.js');
 const { unlink } = require('fs/promises');
 const fetch = require('node-fetch');
+require('dotenv').config();
 
 // ==== CAMPOS ====
 // nome
@@ -99,7 +100,7 @@ const filmeController = {
 				const file = await imageUploadHandle(req.file);
 				if (file) {
 					poster = {
-						url: null,
+						url: process.env.URL + '/media/',
 						img: file,
 						alt: `Poster do filme ${nome}.`
 					};
@@ -248,7 +249,7 @@ const filmeController = {
 						return res.status(400).json({ erro: 'Link de imagem invalido.' });
 				}
 
-				if (filme.poster.url === null)
+				if (filme.poster.url.includes(process.env.URL))
 					await unlink(`./public/media/${filme.poster.img}`);
 
 				if (validated) {
@@ -264,13 +265,13 @@ const filmeController = {
 
 			// Checando se veio como arquivo de imagem e fazendo tratamento
 			if (req.file) {
-				if (filme.poster.url === null)
+				if (filme.poster.url.includes(process.env.URL))
 					await unlink(`./public/media/${filme.poster.img}`);
 
 				const file = await imageUploadHandle(req.file);
 				if (file) {
 					poster = {
-						url: null,
+						url: process.env.URL + '/media/',
 						img: file,
 						alt: `Poster do filme ${filme.nome}.`
 					};
@@ -307,6 +308,9 @@ const filmeController = {
 			const filme = await Filme.findByPk(filmeId);
 			if (!filme)
 				return res.status(404).json({ erro: 'Filme não encontrado.' });
+
+			if (filme.poster.url.includes(process.env.URL))
+				await unlink(`./public/media/${filme.poster.img}`);
 
 			const filmeDeletado = await filme.destroy();
 

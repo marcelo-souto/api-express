@@ -2,19 +2,18 @@ import React from 'react';
 import styles from './SideBarMenu.module.css';
 import SideBarMenuButton from './SideBarMenuButton';
 
-import { ReactComponent as LixeiraIcone } from '../img/lixeira-icone.svg';
-import { ReactComponent as RetiradaIcone } from '../img/seta-icone.svg';
-
-import { ReactComponent as PoltronaIcone } from '../img/poltrona-icone.svg';
-import { ReactComponent as IngressoIcone } from '../img/ingresso-icone.svg';
-import { ReactComponent as CartaoIcone } from '../img/cartao-icone.svg';
+import { ReactComponent as LixeiraIcone } from '../../img/lixeira-icone.svg';
+import { ReactComponent as RetiradaIcone } from '../../img/seta-icone.svg';
+import { ReactComponent as PoltronaIcone } from '../../img/poltrona-icone.svg';
+import { ReactComponent as IngressoIcone } from '../../img/ingresso-icone.svg';
+import { ReactComponent as CartaoIcone } from '../../img/cartao-icone.svg';
 
 function SideBarMenu({ filme, assentosEscolhidos }) {
 	return (
 		<div className={styles.sideBarMenu}>
 			<div className={styles.filmeInfo}>
 				<img
-					src={`${filme.poster.url}/${filme.poster.img}`}
+					src={`${filme.poster.url}${filme.poster.img}`}
 					alt={filme.poster.alt}
 				/>
 				<p className={styles.filmeNome}>{filme.nome}</p>
@@ -34,7 +33,7 @@ function SideBarMenu({ filme, assentosEscolhidos }) {
 					icone={<PoltronaIcone />}
 					texto='escolha de assentos'
 					assentosEscolhidos={assentosEscolhidos}
-					link='/poltronas'
+					link='/'
 				/>
 				<SideBarMenuButton
 					icone={<IngressoIcone />}

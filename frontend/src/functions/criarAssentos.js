@@ -1,3 +1,5 @@
+// Funcao que cria os assentos de acordo com a quantidade de assentos e filas
+
 function criarAssentos({ totalFilas, totalAssentos }) {
 	let assentos = [];
 
