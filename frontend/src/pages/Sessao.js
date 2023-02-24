@@ -4,7 +4,7 @@ import criarAssentos from '../functions/criarAssentos';
 import { sessao } from '../api/sessaoExemplo';
 import styles from './Sessao.module.css';
 import SideBarMenu from '../components/Sessao/SideBarMenu';
-import { getSessaoById } from '../api/Api';
+import { GET_SESSAO_BY_ID } from '../api/Api';
 import useFetch from '../hooks/useFetch';
 import Head from '../components/Helpers/Head'
 import titulo from '../functions/titulo'
@@ -19,7 +19,7 @@ function Sessao() {
 	React.useEffect(() => {
 
 		const getData = async () => {
-			const { url, options } = getSessaoById(8);
+			const { url, options } = GET_SESSAO_BY_ID(8);
 			await request(url, options);
 		};
 

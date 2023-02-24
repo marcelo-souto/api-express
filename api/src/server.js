@@ -11,6 +11,8 @@ const generoRoutes = require('./routes/generoRoutes.js');
 const salaRoutes = require('./routes/salaRoutes.js');
 const diaRoutes = require('./routes/diaRoutes.js');
 const sessaoRoutes = require('./routes/sessaoRoutes.js')
+const tokenRoutes = require('./routes/tokenRoutes.js')
+
 // Variaveis
 const port = process.env.PORT;
 const server = express();
@@ -29,6 +31,7 @@ server.use('/', generoRoutes);
 server.use('/', salaRoutes);
 server.use('/', diaRoutes);
 server.use('/', sessaoRoutes);
+server.use('/', tokenRoutes)
 
 server.get('/', (req, res) => {
 	return res.send('<h1>Servidor rodando ...<h1>');
