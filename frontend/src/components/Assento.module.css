@@ -1,0 +1,35 @@
+.assento {
+  display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 20px;
+	height: 20px;
+	background: #000;
+	border-radius: 50%;
+	font-size: 0.6rem;
+	font-weight: 600;
+	color: transparent;
+	border: none;
+	outline: none;
+  transition: all .3s;
+}
+
+.assento.disponivel:hover:not(.ativo) {
+	background: #FFCA42;
+	color: #000;
+}
+
+.ativo {
+	background: #FFCA42 !important;
+	color: #000;
+}
+
+.disponivel {
+	background: #2094FF;
+	cursor: pointer;
+}
+
+.ocupado {
+	background: #454545;
+}

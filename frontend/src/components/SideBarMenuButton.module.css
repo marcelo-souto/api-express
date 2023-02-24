@@ -1,0 +1,48 @@
+.botao {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  justify-items: start;
+  align-items: center;
+  width: 100%;
+  background: #454545;
+  color: #FFF;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  box-sizing: border-box;
+  gap: 12px;
+  text-transform: uppercase;
+  padding: 24px;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative;
+  text-decoration: none;
+}
+
+.botao::before {
+  content: '';
+  width: 12px;
+  height: 100%;
+  background: #FFCA42;
+  display: block;
+  position: absolute;
+}
+
+:global(.active) {
+  background: #FFCA42;
+}
+
+.botao > svg {
+  justify-self: center;
+}
+
+.botao:hover {
+  background: #FFCA42;
+}
+
+.assentos {
+  font-size: 0.875rem;
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

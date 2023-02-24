@@ -1,0 +1,49 @@
+.sideBarMenu {
+  border: 2px solid #4545454D;
+  border-top: none;
+}
+
+.filmeInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: #FFFFFF;
+  padding: 36px;
+  border-bottom: 2px solid #4545454D;
+}
+
+.filmeInfo > img {
+  border-radius: 12px;
+  display: block;
+}
+
+.filmeNome {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin-left: 20px;
+}
+
+.botao {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 1.25rem;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.botoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  border-bottom: 2px solid #4545454D;
+}
+
+.botoesGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
