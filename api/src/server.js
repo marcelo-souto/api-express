@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const logger = require('./functions/logger.js');
 const path = require('path');
 require('dotenv').config();
@@ -16,6 +17,7 @@ const server = express();
 
 // Middlewares
 server.use(express.static(path.join(__dirname, '../public')));
+server.use(cors())
 server.use(express.json());
 server.use(logger);
 

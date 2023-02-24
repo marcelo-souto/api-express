@@ -9,6 +9,6 @@ router.put('/sessao/update', checkToken, sessaoController.update);
 router.delete('/sessao/delete/:sessaoId', checkToken, sessaoController.delete);
 
 router.get('/sessao/get', sessaoController.getAll);
-router.get('/sessao/getbyid', sessaoController.getById);
+router.get('/sessao/get/:sessaoId', sessaoController.getById);
 
 module.exports = router;

@@ -1,28 +1,33 @@
 const Sessao = require('../models/Sessao.js');
 const Filme = require('../models/Filme.js');
 const Sala = require('../models/Sala.js');
-const Assento = require('../models/Assento.js')
+const Assento = require('../models/Assento.js');
 const Administrador = require('../models/Administrador.js');
 const Dia = require('../models/Dia.js');
 const timeConvert = require('../functions/timeConvert.js');
+require('dotenv').config();
 
 const { Op } = require('sequelize');
 
 const validate = require('../functions/validate.js');
+const Genero = require('../models/Genero.js');
 
 const sessaoController = {
 	getById: async (req, res) => {
-		const { salaId, filmeId } = req.body;
+		const { sessaoId } = req.params;
 
 		try {
-			const sessao = await Sessao.findAll({
-				where: {
-					salaId: salaId,
-					filmeId: filmeId
-				},
+			const sessao = await Sessao.findByPk(sessaoId, {
+				attributes: { exclude: ['salaId', 'administradorId'] },
 				include: [
 					{
-						model: Filme
+						model: Filme,
+						attributes: {
+							exclude: ['administradorId', 'generoId']
+						},
+						include: {
+							model: Genero
+						}
 					},
 					{
 						model: Sala
@@ -33,12 +38,14 @@ const sessaoController = {
 				]
 			});
 
+			if (!sessao)
+				return res.status(404).json({ erro: 'Sessão não encontrada.' });
+
 			return res.status(200).json(sessao);
 		} catch (erro) {
 			return res.status(400).json({ erro: erro.message });
 		}
 	},
-
 	getAll: async (req, res) => {
 		let queries;
 
@@ -57,11 +64,9 @@ const sessaoController = {
 		};
 
 		try {
-			const sessao = await Sessao.findAll(
-				queries && {
-					include: queries.filter((query) => includesQuery[query])
-				}
-			);
+			const sessao = await Sessao.findAll({
+				include: queries && queries.filter((query) => includesQuery[query])
+			});
 
 			return res.status(200).json(sessao);
 		} catch (erro) {

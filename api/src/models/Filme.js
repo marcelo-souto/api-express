@@ -41,7 +41,7 @@ const Filme = sequelize.define(
 		},
 		poster: {
 			type: DataTypes.JSON,
-			allowNull: false
+			allowNull: false,
 		},
 		disponivel3D: {
 			type: DataTypes.BOOLEAN,
