@@ -34,6 +34,9 @@ const sessaoController = {
 					},
 					{
 						model: Assento
+					},
+					{
+						model: Dia
 					}
 				]
 			});
@@ -82,7 +85,7 @@ const sessaoController = {
 			if (!findAdministrador)
 				throw new Error('Usuario não tem autorização para essa área');
 
-			validate({ 'id do dia': dia, type: 'numero', isRequired: true });
+			// validate({ 'id do dia': dia, type: 'numero', isRequired: true });
 			validate({
 				'duração em horas': horas.hora,
 				type: 'numero',
@@ -158,6 +161,7 @@ const sessaoController = {
 				salaId: sala,
 				administradorId: administradorId,
 				preco: preco,
+				diaId: dia,
 
 				inicioMinuto: InicioHorarioEmMinutos,
 				terminoMinuto: TerminoHorarioEmMinutos

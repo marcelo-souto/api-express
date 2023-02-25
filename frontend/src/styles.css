@@ -19,3 +19,57 @@ button {
 img {
   width: 100%;
 }
+
+/* Animations */
+
+.comeFromLeft {
+  transform: translateX(-40px);
+  opacity: 0;
+  animation: comeFromLeft 0.3s forwards;
+}
+
+@keyframes comeFromLeft {
+  to {
+    transform: initial;
+    opacity: initial;
+  }
+}
+
+.comeFromRight {
+  transform: translateX(40px);
+  opacity: 0;
+  animation: comeFromRight 0.3s forwards;
+}
+
+@keyframes comeFromRight {
+  to {
+    transform: initial;
+    opacity: initial;
+  }
+}
+
+.comeFromBottom {
+  transform: translateY(40px);
+  opacity: 0;
+  animation: comeFromBottom 0.3s forwards;
+}
+
+@keyframes comeFromBottom {
+  to {
+    transform: initial;
+    opacity: initial;
+  }
+}
+
+.comeFromTop {
+  transform: translateY(-40px);
+  opacity: 0;
+  animation: comeFromTop 0.3s forwards;
+}
+
+@keyframes comeFromTop {
+  to {
+    transform: initial;
+    opacity: initial;
+  }
+}

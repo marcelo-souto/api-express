@@ -2,8 +2,8 @@ const sequelize = require('../database/database.js');
 const { DataTypes } = require('sequelize');
 const Filme = require('./Filme.js');
 const Sala = require('./Sala.js');
-const Horario = require('./Horario.js');
 const Administrador = require('./Administrador.js');
+const Dia = require('./Dia.js');
 
 const Sessao = sequelize.define(
 	'sessoes',
@@ -42,15 +42,22 @@ const Sessao = sequelize.define(
 			type: DataTypes.DECIMAL,
 			allowNull: false
 		},
-		inicioMinuto:{
+		inicioMinuto: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		terminoMinuto:{
+		terminoMinuto: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-
+		diaId: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			references: {
+				model: Dia,
+				key: 'diaId'
+			}
+		}
 	},
 	{
 		timestamps: false
@@ -79,6 +86,9 @@ Sessao.hasOne(Administrador, {
 
 Administrador.hasMany(Sessao, { foreignKey: 'administradorId' });
 Sessao.belongsTo(Administrador, { foreignKey: 'administradorId' });
+
+Dia.hasMany(Sessao, { foreignKey: 'diaId' });
+Sessao.belongsTo(Dia, { foreignKey: 'diaId' });
 
 // Sessao.sync({ force: true });
 

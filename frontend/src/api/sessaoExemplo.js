@@ -16,7 +16,7 @@ const sessao = {
         ]
     },
     sala: {
-        totalFilas: 8,
+        totalFilas: 5,
         totalAssentos: 100
     }
 }

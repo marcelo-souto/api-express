@@ -10,11 +10,18 @@ function Sala({
 	assentosEscolhidos
 }) {
 	function handleAssentosEscolhidos(codigo) {
-		if (!assentosEscolhidos.includes(codigo)) {
-			setAssentosEscolhidos([...assentosEscolhidos, codigo]);
+		const assentoNaoEscolhido = !assentosEscolhidos.find(
+			(assento) => assento.assento === codigo
+		);
+
+		if (assentoNaoEscolhido) {
+			setAssentosEscolhidos([
+				...assentosEscolhidos,
+				{ assento: codigo, tipo: null }
+			]);
 		} else {
 			setAssentosEscolhidos(
-				assentosEscolhidos.filter((assento) => assento !== codigo)
+				assentosEscolhidos.filter((assento) => assento.assento !== codigo)
 			);
 		}
 	}
@@ -36,7 +43,7 @@ function Sala({
 								disponivel={!assentosOcupados.includes(codigo)}
 								key={codigo + index}
 								codigo={codigo}
-								ativo={assentosEscolhidos.includes(codigo)}
+								ativo={assentosEscolhidos.find((assento) => assento.assento === codigo)}
 								onClick={() => handleAssentosEscolhidos(codigo)}
 							/>
 						);

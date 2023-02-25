@@ -1,0 +1,29 @@
+.botao {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 1rem;
+  text-decoration: none;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.sideBarMenu a:hover {
+  color: #FFF;
+}
+
+.botoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  border-bottom: 2px solid #4545454D;
+}
+
+.botoesGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
