@@ -1,5 +1,14 @@
+.sessao {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
   display: grid;
+  padding: 60px;
+  padding-top: 1px;
   grid-template-columns: 2fr 3fr;
 }
 

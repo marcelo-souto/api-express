@@ -1,8 +1,6 @@
 import React from 'react';
-import { UserContext } from './context/UserContext';
-import useForm from './hooks/useForm';
-import Sessao from './pages/Sessao';
-import './styles.css';
+import { UserContext } from '../context/UserContext';
+import useForm from '../hooks/useForm';
 
 function App() {
 	const { userLogin, user, loading, error, userLogout, loggedIn } =

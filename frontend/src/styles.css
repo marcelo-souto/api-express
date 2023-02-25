@@ -1,9 +1,7 @@
-.App {
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
+body {
+  background: #282828;
 }
+
 
 h1, h2, h3, h4, p, li, ul {
   margin: 0;
@@ -13,9 +11,16 @@ h1, h2, h3, h4, p, li, ul {
 button {
   border: none;
   outline: none;
-  font-family: 'Poppins', sans-serif;
 }
 
 img {
   width: 100%;
 }
+
+  .max {
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+  }
+

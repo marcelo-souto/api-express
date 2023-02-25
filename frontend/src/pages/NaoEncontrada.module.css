@@ -1,0 +1,13 @@
+.mensagemBg {
+  padding: 244px;
+}
+
+.mensagem h1 {
+  color: #ffff;
+  font-size: 25px;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  

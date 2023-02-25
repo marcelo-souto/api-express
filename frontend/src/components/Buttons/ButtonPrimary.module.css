@@ -1,0 +1,21 @@
+ .buttonPrimary {
+    padding: 10px 26px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 9px;
+    border: none;
+    cursor: pointer;
+    background-color: #FFCA42;
+    color: #282828;
+    transition: 0.3s ease;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+  }
+  
+  .buttonPrimary:hover {
+    box-shadow: 0 0 10px #211d1266;
+  }
+  
+  .buttonSecondary:disabled {
+    background-color: #515151;
+  }

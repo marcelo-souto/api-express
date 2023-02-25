@@ -1,0 +1,21 @@
+.buttonSecondary {
+  padding: 10px 26px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  background-color:  #515151;
+  color: #ffffff;
+  transition: 0.3s ease;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.buttonSecondary:hover {
+  background-color: #626262;
+}
+
+.buttonPrimary:disabled {
+  background-color:  #515151;
+}

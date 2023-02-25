@@ -1,0 +1,51 @@
+.headerBg {
+  background: #454545;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+.header img {
+  width: 2.5rem;
+}
+
+.logo img {
+  width: 9.5rem;
+  margin-right: 46rem;
+  padding-bottom: 8px;
+}
+
+.nav {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -20px;
+}
+
+.nav a {
+  margin-right: 2px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #e5e5e5;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+
+.nav a:hover {
+  color: white;
+}
+
+.nav img {
+  width: 1.3rem;
+  padding-bottom: 5px;
+  margin-right: 35px;
+  margin-left: 5px;
+}
+
