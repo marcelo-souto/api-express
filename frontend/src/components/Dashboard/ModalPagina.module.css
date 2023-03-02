@@ -1,0 +1,15 @@
+.botoes {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+
+.botoes > div {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+  align-items: center;
+}

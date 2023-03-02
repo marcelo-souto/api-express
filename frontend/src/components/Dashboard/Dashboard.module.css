@@ -1,0 +1,45 @@
+.titulo {
+	font-weight: 700;
+}
+
+.container {
+	padding: 64px;
+	max-width: 1200px;
+	margin: 0 auto;
+	height: 100%;
+}
+
+.pages {
+	background: #eff2f5;
+	padding: 32px;
+	border-radius: 12px;
+	margin-top: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.pages .button {
+	align-self: end;
+}
+
+.pages > ul {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.page {
+	background: linear-gradient(45deg, #fff, #fafafa);
+	padding: 24px 32px;
+	margin-bottom: 0;
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: #6a6a6a;
+	border-radius: 12px;
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	align-items: center;
+	gap: 12px;
+}

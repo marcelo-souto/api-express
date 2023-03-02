@@ -1,3 +1,0 @@
-# cinema-website
-
-Projeto em desenvolvimento, volte mais tarde ...

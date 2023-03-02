@@ -22,10 +22,6 @@ const Administrador = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		emailVerificado: {
-			type: DataTypes.BOOLEAN,
-			allowNull: false
-		}
 	},
 	{
 		timestamps: false
