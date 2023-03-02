@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://escola-website-production.up.railway.app';
 
 // Login
 const POST_TOKEN = (body) => {
