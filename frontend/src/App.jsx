@@ -7,6 +7,8 @@ import { UserStorage } from './context/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Global/Header';
 import Footer from './components/Global/Footer';
+import FunctionPage from './pages/FunctionsPage';
+import LandingPage from './pages/LandingPage';
 import './styles/global.css';
 
 function App() {
@@ -17,12 +19,20 @@ function App() {
 				<div className='content'>
 					<Routes>
 						<Route
-							path=':nome'
+							path=''
 							element={<HomePage />}
+						/>
+						<Route
+							path='sobre'
+							element={<LandingPage />}
 						/>
 						<Route
 							path='login/*'
 							element={<LoginPage />}
+						/>
+						<Route
+							path='funcionalidades'
+							element={<FunctionPage />}
 						/>
 						<Route
 							path='dashboard'

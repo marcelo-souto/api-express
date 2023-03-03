@@ -6,11 +6,13 @@
 
 .header {
 	display: grid;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: 1fr auto auto;
 	align-items: center;
 	padding-top: 18px;
 	padding-bottom: 18px;
 }
+
+
 
 .header a {
 	color: #323232;
@@ -63,6 +65,22 @@
 	animation: showMenu .3s ease-in-out forwards ;
 }
 
+.links {
+	display: flex;
+	align-items: center;
+	gap: 36px;
+	margin-right: 32px;
+}
+
+.links a {
+	color: #656565;
+	transition: all .3s;
+}
+
+.links a:hover {
+	text-decoration: underline !important;
+	color: #0167ff;
+}
 
 @keyframes showMenu {
 	to {

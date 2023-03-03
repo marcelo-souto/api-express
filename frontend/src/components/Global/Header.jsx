@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 import { UserContext } from '../../context/UserContext';
+import Button from '../Form/Button';
 import { ReactComponent as LogoImage } from '../../img/layers.svg';
 import { ReactComponent as Seta } from '../../img/arrow.svg';
 import { ReactComponent as Sair } from '../../img/sair.svg';
@@ -26,10 +27,16 @@ function Header() {
 				<Link to=''>
 					<LogoImage width='28' />
 				</Link>
-				<nav>
+				<div className={styles.links}>
+					<Link to='sobre'>Sobre</Link>
+					<Link to='funcionalidades'>Funcionalidades</Link>
+					<Link to='contato'>Contato</Link>
+				</div>
+				<nav className={styles.nav}>
 					{loggedIn && user && !location.pathname.includes('dashboard') && (
 						<Link
-							to='/dashboard' end
+							to='/dashboard'
+							end
 							className={styles.user}
 						>
 							<div className={styles.icon}>{user.nome[0]}</div>
@@ -58,7 +65,11 @@ function Header() {
 							/>
 						</div>
 					)}
-					{!loggedIn && <Link to='/login'>Login</Link>}
+					{!loggedIn && (
+						<Link to='/login'>
+							<Button variant='outline-primary'>Login</Button>
+						</Link>
+					)}
 					{loggedIn && menu && location.pathname.includes('dashboard') && (
 						<div
 							className={styles.headerMenu}
